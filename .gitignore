@@ -1,0 +1,9 @@
+*.swp
+*.swn
+*.swo
+*.swl
+*.swm
+*.pyc
+*.retry
+.~lock*
+__pycache__
