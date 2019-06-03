@@ -76,14 +76,14 @@
         #Check if the user is on the counting page
     if(strtolower(htmlentities($_SERVER["PHP_SELF"])) == "/countingcards/cardgame.php") {
         #Assign the Page Title
-        $strPageTitle = "DCDarknet Card Counting Quest";
-        $strHomePage = "<a href='CardGame.php?Shoes=7&Speed=1'>Home</a>";
+        $pageTitle = "Card Counting";
+        $homePage = "<a href='CardGame.php?Shoes=7&Speed=1'>Home</a>";
     }
     #Check if the user is on the FileName_Form page
     if(strtolower(htmlentities($_SERVER["PHP_SELF"])) == "/countingcards/count.php") {
         #Assign the Page Title
-        $strPageTitle = "DCDarknet Card Counting Quest Submit";
-        $strHomePage = "<a href='CardGame.php?Shoes=7&Speed=1'>Home</a>";
+        $pageTitle = "Card Counting Submit";
+        $homePage = "<a href='CardGame.php?Shoes=7&Speed=1'>Home</a>";
     }
 ?>
 <!DOCTYPE html>
@@ -93,7 +93,7 @@
         <meta http-equiv='expires' content='0'>
         <title>
             <?php
-                echo $strPageTitle;
+                echo $pageTitle;
             ?>
         </title>
         <script src='js/jquery.min.js'>
@@ -104,9 +104,9 @@
             }
         </style>
         <?php
-            echo $strHomePage . "<br>";
+            echo $homePage . "<br>";
 
             #Clear Variables
-            unset($strPageTitle);
-            unset($strHomePage);
+            unset($pageTitle);
+            unset($homePage);
         ?>
