@@ -92,50 +92,19 @@
      }
 
      #Function for salting and hasing passwords
-     function funcPasswordSalt($strPassword) {
-        #Hash the password to avoid any character incompatibilities
-        $strHash = hash("sha256", $strPassword);
-
-        #Generate a pseudo random IV size
-        $intMCryptSize = mcrypt_get_iv_size(MCRYPT_CAST_256, MCRYPT_MODE_CFB);
-
-        #Generate a random salt based on the pseudo random IV size
-        #You must remove the + otherwise BCrypt will fail
-        $strSalt = str_replace("+", ".", base64_encode(
-          mcrypt_create_iv($intMCryptSize, MCRYPT_DEV_URANDOM)));
-
-        #Generate the hashed and salted password
-        $strPasswordHash = crypt($strHash, "$2y$13$" . $strSalt);
-
-        #Clear variables
-        unset($strHash);
-        unset($intMCryptSize);
-
-        #Verify there were no errors in generating the hash
-        if(strlen($strPasswordHash) < 5) {
-            exit("Salting failure<br>Please try again.");
-        }
-
-        return array($strPasswordHash, $strSalt);
+     function passwordHash($password) {
+        $options = [ "cost" => 13, ];
+        $passwordHash = password_hash($password, PASSWORD_BCRYPT, $options);
+        return($passwordHash);
     }
 
      #Function to verify a password
-     function funcPasswordVerify($strPassword, $strSalt) {
-        #Hash the password to avoid any character incompatibilities
-        $strHash = hash("sha256", $strPassword);
-
-        #Generate the hashed and salted password
-        $strPasswordHash = crypt($strHash, "$2y$13$" . $strSalt);
-
-        #Verify there were no errors in generating the hash
-        if(strlen($strPasswordHash) < 5) {
-            exit("Salting failure<br>Please try again.");
+     function passwordVerify($password, $hash) {
+        if (password_verify($password, $hash)) {
+            return True; 
+        } else {
+            return False;
         }
-
-        #Clear variables
-        unset($strHash);
-
-        return $strPasswordHash;
     }
 
 

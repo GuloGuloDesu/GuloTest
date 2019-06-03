@@ -1,5 +1,5 @@
 <?php
-    error_reporting(E_ALL);
+    #error_reporting(E_ALL);
 
 #Disable the website from being directly accessed
     #Create an array of the Website location
@@ -18,8 +18,7 @@
         exit;
     }
 
-    #DBCon.php for DB Connections and PHPFunc for PHP Functions
-    require 'DBCon.php';
+    #PHPFunc for PHP Functions
     require 'PHPFunc.php';
 
     #Define Constants

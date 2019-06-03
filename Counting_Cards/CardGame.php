@@ -7,6 +7,14 @@
     #Define Constants
     $strPoints = "<br>";
 
+    #Check first load for Shoes and Speed
+    if(!isset($_GET["Shoes"])) {
+        $_GET["Shoes"] = 1;
+    }
+    if(!isset($_GET["Speed"])) {
+        $_GET["Speed"] = 1;
+    }
+
     #Verify the shoe number is an integer
     $verifyIntegers = validInt($_GET["Shoes"]);
     if($verifyIntegers[0] == 0) {
@@ -88,18 +96,18 @@
 <?php
     #If Speed and Shoe size is greater than X
     #Create a POST variable to submit for points
-    if ($cleanSpeed == 1000 AND $cleanShoe > 6) {
-            print str_repeat($tab, 2) . "<br>Speed and Shoe size meet " . 
-                    "the mininum requirements for Darknet points. Good " . 
-                    "luck!<br><br>\n";
-        $_SESSION['Points'] = 'Yes';
-    }
-    else {
-            print str_repeat($tab, 2) . "<br>Please increase the shoe " . 
-                    "size to at least 7 and decrease the speed to at " .
-                    "least 1 to get Darknet points.<br><br>\n";  
-            $_SESSION['Points'] = 'No';
-    }
+    #if ($cleanSpeed == 1000 AND $cleanShoe > 6) {
+    #        print str_repeat($tab, 2) . "<br>Speed and Shoe size meet " . 
+    #                "the mininum requirements for points. Good " . 
+    #                "luck!<br><br>\n";
+    #    $_SESSION['Points'] = 'Yes';
+    #}
+    #else {
+    #        print str_repeat($tab, 2) . "<br>Please increase the shoe " . 
+    #                "size to at least 7 and decrease the speed to at " .
+    #                "least 1 to get points.<br><br>\n";  
+    #        $_SESSION['Points'] = 'No';
+    #}
 
     #Buttons to increase and decrease shoe size and speed
     print "<a href='" . $_SERVER['PHP_SELF'] . "?Shoes=" . 
@@ -193,12 +201,14 @@
     print str_repeat($tab, 2) . "</div>\n";
 
     #Encrypt the count and assign the random salt to a session
-    $arrPasswordSalt = funcPasswordSalt($count);
-    #$_SESSION['Salt'] = $arrPasswordSalt[1];
-    $_SESSION['ActualCount'] = $arrPasswordSalt;
-
-    print "<br>Count:  " . $count . "<br>\n";
+    $passwordHash = passwordHash($count);
+    $_SESSION['ActualCount'] = $passwordHash;
+    #print "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+    #print "<br>Count:  " . $count . "<br>\n";
 ?>
+        <br><br>
+        <br><br>
+        <br><br>
         <br><br>
         <br><br>
         <br><br>
